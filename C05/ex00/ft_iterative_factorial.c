@@ -6,7 +6,7 @@
 /*   By: ysemlali <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/26 18:38:49 by ysemlali          #+#    #+#             */
-/*   Updated: 2023/08/26 19:43:56 by ysemlali         ###   ########.fr       */
+/*   Updated: 2023/08/30 17:53:24 by ysemlali         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,11 +15,13 @@ int	ft_iterative_factorial(int nb)
 	int	i;
 
 	i = 1;
-	while (nb)
+	while (nb > 0)
 	{
 		i *= nb;
 		nb--;
 	}
+	if (nb < 0)
+		return (0);
 	return (i);
 }
 /*

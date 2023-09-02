@@ -6,7 +6,7 @@
 /*   By: ysemlali <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/22 23:33:39 by ysemlali          #+#    #+#             */
-/*   Updated: 2023/08/22 23:55:38 by ysemlali         ###   ########.fr       */
+/*   Updated: 2023/08/27 14:31:01 by ysemlali         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,10 +24,11 @@ int	main(int argc, char *argv[])
 
 	i = 0;
 	arg = argv[0];
-	while (arg[i])
+	while (arg[i] && argc)
 	{
 		put_char(arg[i]);
 		i++;
 	}
+	put_char('\n');
 	return (0);
 }

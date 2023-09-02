@@ -6,7 +6,7 @@
 /*   By: ysemlali <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/21 20:10:56 by ysemlali          #+#    #+#             */
-/*   Updated: 2023/08/22 20:23:19 by ysemlali         ###   ########.fr       */
+/*   Updated: 2023/08/24 17:24:04 by ysemlali         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,25 +15,23 @@ int	ft_strncmp(char *s1, char *s2, unsigned int n)
 	unsigned int	i;
 
 	i = 0;
-	while (src[i] && i < n)
+	while (i < n && (s1[i] || s2[i]))
 	{
-		dest[i] = src[i];
+		if (s1[i] != s2[i])
+			return (s1[i] - s2[i]);
+		i++;
 	}
-	while (i < n)
-	{
-		dest[i] = '\0'  ;
-		i++ ;
-	}
-	return(dest);
+	return (0);
 }
-int main() {
-   char str1[] = "123a";
-    char str2[] = "123z";
-    unsigned int n = 4;
-
-    int comp = ft_strncmp(str1, str2, n);
-
-    printf(" %d", comp);
-
-	return 0;
-}
+/*
+int	main(void)
+{
+	unsigned int	n;
+	int				comp;
+	char str1[] = "123z";
+	char str2[] = "123a";
+	n = 4;
+	comp = ft_strncmp(str1, str2, n);
+	printf(" %d", comp);
+	return (0);
+}*/

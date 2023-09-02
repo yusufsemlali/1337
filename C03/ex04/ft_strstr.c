@@ -30,7 +30,6 @@ char	*ft_strstr(char *str, char *to_find)
 {
 	int	i;
 	int	h;
-	int	cmp;
 
 	if (to_find[0] == '\0')
 	{
@@ -42,8 +41,7 @@ char	*ft_strstr(char *str, char *to_find)
 	{
 		if (str[i] == to_find[h])
 		{
-			cmp = ft_strcmp(&str[i], to_find);
-			if (cmp == 0)
+			if (ft_strcmp(&str[i], to_find) == 0)
 				return (&str[i]);
 		}
 		i++;

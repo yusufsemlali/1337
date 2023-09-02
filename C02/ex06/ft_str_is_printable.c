@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: ysemlali <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/08/20 14:13:08 by ysemlali          #+#    #+#             */
-/*   Updated: 2023/08/22 21:08:02 by ysemlali         ###   ########.fr       */
+/*   Created: 2023/08/26 10:46:21 by ysemlali          #+#    #+#             */
+/*   Updated: 2023/08/26 10:50:09 by ysemlali         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,12 +21,11 @@ int	ft_str_is_printable(char *str)
 	}
 	while (str[i])
 	{
-		if (str[i] >= '31' && str[i] <= '126')
+		if (str[i] < 32 || str[i] > 126)
 		{
-			i++;
-		}
-		else
 			return (0);
+		}
+		i++;
 	}
 	return (1);
 }

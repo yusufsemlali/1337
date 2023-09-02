@@ -6,7 +6,7 @@
 /*   By: ysemlali <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/21 09:44:26 by ysemlali          #+#    #+#             */
-/*   Updated: 2023/08/22 10:54:18 by ysemlali         ###   ########.fr       */
+/*   Updated: 2023/08/23 16:05:22 by ysemlali         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,11 +34,11 @@ unsigned int	ft_strlcpy(char *dest, char *src, unsigned int size)
 //int main() {
 //    char src[] = "Welcome Home";
 //    char dest[7]; 
-//
+//    char result[] = ft_strlcpy(dest, src)
 //    unsigned int copy = ft_strlcpy(dest, src, sizeof(dest));
 //
 //    printf("Copied: %u\n", copy);
-//    printf("Destination: %s\n", dest);
+//    printf("Destination: %s\n", result);
 //
 //    return 0;
 //}

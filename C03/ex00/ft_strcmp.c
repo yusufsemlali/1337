@@ -6,18 +6,20 @@
 /*   By: ysemlali <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/21 18:18:04 by ysemlali          #+#    #+#             */
-/*   Updated: 2023/08/22 22:37:08 by ysemlali         ###   ########.fr       */
+/*   Updated: 2023/08/23 18:19:05 by ysemlali         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 int	ft_strcmp(char *s1, char *s2)
 {
-	while (*s1 || *s2)
+	int	i;
+
+	i = 0;
+	while (s1[i] || s2[i])
 	{
-		if (*s1 != *s2)
-			return (*s1 - *s2);
-		s1++;
-		s2++;
+		if (s1[i] != s2[i])
+			return (s1[i] - s2[i]);
+		i++;
 	}
 	return (0);
 }

@@ -1,66 +1,74 @@
-int	count_len(char *len)
-{
-	int	i;
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_sort_params.c                                   :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ysemlali <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/08/27 16:16:35 by ysemlali          #+#    #+#             */
+/*   Updated: 2023/08/27 17:27:37 by ysemlali         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+#include <unistd.h>
 
-	i=0;
-	while(len[i])
-	{
-		i++;
-	}
-	return (i);
-}
-
-void	ft_sort_tab(char *tab)
-{
-	int	i;
-	int	e;
-	int	temp;
-	int len;
-   
-	len	= count_len(tab);
-	i = 0;
-
-	while (i < len - 1)
-	{
-		e = 0;
-		while (e < len - i - 1)
-		{
-			if (tab[e] > tab[e + 1])
-			{
-				temp = tab[e];
-				tab[e] = tab[e + 1];
-				tab[e + 1] = temp;
-			}
-			e++;
-		}
-		i++;
-	}
-}
-#include<unistd.h>
-
-void	put_char(char *c)
+void	print(char *str)
 {
 	int	i;
 
 	i = 0;
-	while(c[i])
+	while (str[i] != '\0')
 	{
-		write(1 , &c[i], 1);
+		write(1, &str[i], 1);
 		i++;
 	}
+}
+
+int	compare_strings(char *str1, char *str2)
+{
+	int	i;
+
+	i = 0;
+	while (str1[i] || str2[i])
+	{
+		if (str1[i] != str2[i])
+			return (str1[i] - str2[i]);
+			i++;
+	}
+	return (0);
+}
+
+void	swap_strings(char **a, char **b)
+{
+	char	*tmp;
+
+	tmp = *a;
+	*a = *b;
+	*b = tmp;
 }
 
 int	main(int argc, char **argv)
 {
-	int	i;
+	int	x;
+	int	y;
 
-	i = 1;
-	while(i < argc)
+	x = 1;
+	while (x < argc - 1)
 	{
-		ft_sort_tab(argv[i]);
-		put_char(argv[i]);
+		y = 1;
+		while (y < argc - 1)
+		{
+			if (compare_strings(argv[y], argv[y + 1]) > 0)
+				swap_strings(&argv[y], &argv[y + 1]);
+			y++;
+		}
+		x++;
+	}
+	y = 1;
+	while (y < argc)
+	{
+		print(argv[y]);
 		write(1, "\n", 1);
-		i++;
+		y++;
 	}
 	return (0);
 }
