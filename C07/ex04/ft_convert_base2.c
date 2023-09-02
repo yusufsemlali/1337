@@ -1,6 +1,14 @@
-#include<unistd.h>
-#include "ft_convert_base.c"
-
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_convert_base2.c                                 :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ysemlali <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/09/02 17:03:00 by ysemlali          #+#    #+#             */
+/*   Updated: 2023/09/02 17:03:41 by ysemlali         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 int	ft_strlen(char *str)
 {
 	int	i;
@@ -40,8 +48,6 @@ int	ft_check(char *base)
 	return (i);
 }
 
-
-
 int	ft_sign(char *str, int *i2)
 {
 	int	i;
@@ -76,5 +82,3 @@ int	base_index(char str, char *base)
 	}
 	return (-1);
 }
-
-
