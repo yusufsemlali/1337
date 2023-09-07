@@ -5,134 +5,118 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: ysemlali <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/09/02 17:02:50 by ysemlali          #+#    #+#             */
-/*   Updated: 2023/09/02 18:11:59 by ysemlali         ###   ########.fr       */
+/*   Created: 2023/09/06 06:19:11 by ysemlali          #+#    #+#             */
+/*   Updated: 2023/09/06 06:19:13 by ysemlali         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
-#include <stdio.h>
 #include <stdlib.h>
-#include <unistd.h>
 
-char	ft_strlen(char *str);
-int		ft_check(char *base);
-int		ft_sign(char *str, int *i2);
-int		base_index(char str, char *base);
+int		get_len_num(int num, int len_base);
+int		get_length(char *str);
+int		check_error(char *str);
+int		find_num(char c, char *str);
 
-void	ft_putnbr_base(int nbr, char *base, char *arr)
+int	get_sign(char *str, int *index)
 {
-	long	nb;
-	int		i;
+	int	i;
+	int	sign;
 
 	i = 0;
-	nb = (long)nbr;
-	if (!ft_check(base))
-		return ;
-	if (nb < 0)
-	{
-		arr[0] = '-';
+	sign = 1;
+	while ((str[i] >= 9 && str[i] <= 13) || str[i] == 32)
 		i++;
-		nb = -nb;
+	while (str[i] == 45 || str[i] == 43)
+	{
+		if (str[i] == '-')
+			sign *= -1;
+		i++;
 	}
-	if (nb / ft_strlen(base) != 0)
-		ft_putnbr_base(nb / ft_strlen(base), base, arr + i + 1);
-	arr[i++] = base[nb % ft_strlen(base)];
+	*index = i;
+	return (sign);
 }
 
 int	ft_atoi_base(char *str, char *base)
 {
-	int	i;
-	int	num;
 	int	index;
+	int	num1;
+	int	num2;
 	int	sign;
 	int	base_len;
 
-	i = 0;
-	num = 0;
-	base_len = ft_check(base);
-	if (base_len >= 2)
+	base_len = get_length(base);
+	index = 0;
+	sign = get_sign(str, &index);
+	num1 = 0;
+	num2 = find_num(str[index], base);
+	while (num2 != -2)
 	{
-		sign = ft_sign(str, &i);
-		index = base_index(str[i], base);
-		while (index != -1)
-		{
-			num = (num * base_len) + index;
-			i++;
-			index = base_index(str[i], base);
-		}
-		return (num *= sign);
+		num1 = (num1 * base_len) + num2;
+		index++;
+		num2 = find_num(str[index], base);
 	}
-	return (0);
+	return (num1 * sign);
 }
 
-int	count_size(int n, int base_len)
+void	ft_putnbr_base(int num, char *base, int len_base, char *final_number)
 {
-	int	num;
-	int	size;
-
-	num = n;
-	size = 0;
-	if (num < 0)
-	{
-		num = -num;
-		size++;
-	}
-	while (n != 0)
-	{
-		size++;
-		n /= base_len;
-	}
-	return (size);
-}
-
-void	ft_strrev(char *arr, int size)
-{
-	char	temp;
+	long	n;
 	int		i;
+	int		len_number;
 
-	i = 1;
-	while (i < size)
+	n = num;
+	i = 0;
+	len_number = get_len_num(num, len_base);
+	if (n < 0)
 	{
-		temp = arr[i];
-		arr[i] = arr[size];
-		arr[size] = temp;
-		i++;
-		size--;
+		final_number[0] = '-';
+		n *= -1;
+		i = 1;
 	}
+	len_number--;
+	while (n >= len_base)
+	{
+		final_number[len_number] = base[n % len_base];
+		n /= len_base;
+		len_number--;
+	}
+	if (n < len_base)
+		final_number[i] = base[n];
 }
 
-char	*ft_convert_base(char *nbr, char *base_from, char *base_to)
+char	*ft_convert_base(char *number, char *from_base, char *to_base)
 {
-	int				n;
-	unsigned int	tab_size;
-	char			*ch_arr;
+	int		num;
+	int		len_base;
+	int		len_number;
+	char	*final_number;
 
-	n = ft_atoi_base(nbr, base_from);
-	if (n == 0)
-		return ("0");
-	tab_size = count_size(n, ft_check(base_to));
-	ch_arr = malloc(sizeof(char) * (tab_size + 1));
-	if (!ch_arr)
+	if (check_error(from_base) == 0 || check_error(to_base) == 0)
 		return (0);
-	ft_putnbr_base(n, base_to, ch_arr);
-	ch_arr[tab_size] = '\0';
-	ft_strrev(ch_arr, tab_size - 1);
-	printf("\n| %d  >    %d >    %s ", n, tab_size, ch_arr);
-	return (ch_arr);
+	num = ft_atoi_base(number, from_base);
+	len_base = get_length(to_base);
+	len_number = get_len_num(num, len_base);
+	final_number = (char *)malloc((len_number + 1) * sizeof(char));
+	if (!final_number)
+		return (0);
+	ft_putnbr_base(num, to_base, len_base, final_number);
+	final_number[len_number] = '\0';
+	return (final_number);
 }
 
-int	main(void)
-{
-	char	*str;
-	char	*base;
-	char	*base_to;
-	char	*result;
+// #include <stdio.h>
 
-	str = "-11";
-	base = "0123456789";
-	base_to = "0123456789ABCDEF";
-	result = ft_convert_base(str, base, base_to);
-	printf(" \n string: %s\n", str);
-	printf("result: %s\n", result);
-	return (0);
-}
+// int	main(void)
+// {
+// 	char	*str;
+// 	char	*base;
+// 	char	*base_to;
+// 	char	*result;
+
+// 	str = "101010";
+// 	base = "01";
+// 	base_to = "0123456789ABCDEF";
+// 	result = ft_convert_base(str, base, base_to);
+// 	printf("%s\n", str);
+// 	printf("%s\n", result);
+// 	return (0);
+// }

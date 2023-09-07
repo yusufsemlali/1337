@@ -6,10 +6,9 @@
 /*   By: ysemlali <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/28 10:19:31 by ysemlali          #+#    #+#             */
-/*   Updated: 2023/09/01 22:08:47 by ysemlali         ###   ########.fr       */
+/*   Updated: 2023/09/05 15:07:36 by ysemlali         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-#include <stdio.h>
 #include <stdlib.h>
 
 int	ft_str_len(char *str)
@@ -24,22 +23,30 @@ int	ft_str_len(char *str)
 	return (index);
 }
 
-int	total_count(char *str, char sep, int size)
+int	total_count(char **strs, char *sep, int size)
 {
 	int	len;
 	int	i;
+	int	x;
 
 	len = 0;
-	i = 0;
-	while (i < size)
+	x = 0;
+	while (x < size)
 	{
-		len += ft_str_len(str);
+		i = 0;
+		while (strs[x][i])
+		{
+			len++;
+			i++;
+		}
+		x++;
+	}
+	i = 0;
+	while (sep[i])
+	{
 		i++;
 	}
-	if (sep != '\0')
-	{
-		len += (size - 1);
-	}
+	len += i * (size - 1);
 	return (len);
 }
 
@@ -59,57 +66,61 @@ char	*ft_strcpy(char *dest, char *src)
 
 void	concat(char *dest, char **strs, char *sep, int size)
 {
-	char	*d;
-	int		i;
+	int	i;
 
 	i = 0;
-	d = dest;
 	while (i < size)
 	{
-		ft_strcpy(d, strs[i]);
-		d += ft_str_len(strs[i]);
+		ft_strcpy(dest, strs[i]);
+		dest += ft_str_len(strs[i]);
 		if (i < size - 1)
 		{
-			ft_strcpy(d, sep);
-			d += ft_str_len(sep);
+			ft_strcpy(dest, sep);
+			dest += ft_str_len(sep);
 		}
 		i++;
 	}
-	*d = '\0';
+	*dest = '\0';
 }
 
 char	*ft_strjoin(int size, char **strs, char *sep)
 {
-	char	*strings_cat;
+	char	*out;
 	int		ch_count;
 
-	if (size == 0)
+	if (size <= 0)
 	{
-		strings_cat = (char *)malloc(1);
-		if (!strings_cat)
+		out = malloc(sizeof(char));
+		if (!out)
 			return (0);
-		strings_cat[0] = '\0';
-		return (strings_cat);
+		*out = '\0';
+		return (out);
 	}
-	ch_count = total_count(*strs, *sep, size);
-	strings_cat = (char *)malloc((ch_count + 1) * sizeof(char));
-	if (!strings_cat)
-		return (0);
-	concat(strings_cat, strs, sep, size);
-	return (strings_cat);
+	else
+	{
+		ch_count = total_count(strs, sep, size);
+		out = malloc(ch_count * sizeof(char));
+		if (!out)
+			return (0);
+		concat(out, strs, sep, size);
+		return (out);
+	}
+	return (0);
 }
 /*
+#include <stdio.h>
+
 int	main(void)
 {
 	char	*sep;
 	char	*result;
-	char *strs[] = {"Hello", "world", "how", "are", "you"};
-	sep = "----";
-	result = ft_strjoin(5, strs, sep);
+	char *strs[] = {"he", "wo", "h","wo"};
+	sep = "what what ";
+	result = ft_strjoin(4, strs, sep);
 	if (result)
 	{
 		printf("%s\n", result);
-		free(result); 
+		free(result);
 	}
 	return (0);
 }*/

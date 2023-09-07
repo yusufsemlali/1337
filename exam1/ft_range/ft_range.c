@@ -4,7 +4,6 @@ int	*ft_range(int min, int max)
 {
 	int	i;
 	int	*arr_of_ints;
-	int *arr_0;
 	int	size;
 
 	i = 0;
@@ -81,7 +80,7 @@ int main() {
     free(result);
 
     // Test case 4
-    start = 0;
+    start = -7;
     end = -3;
     result = ft_range(start, end);
     printf("Result for (%d, %d):\n", start, end);

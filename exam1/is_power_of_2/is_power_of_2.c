@@ -10,8 +10,11 @@ int	is_a_power_of_2(unsigned int n)
 	}
 	return (0);
 }
+
+#include<stdio.h>
 int main(void)
-{	unsigned	int n = 2;
+{	unsigned	int n = 8;
 	int result = is_a_power_of_2(n);
 	printf("%d", result);
 }
+

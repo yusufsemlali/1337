@@ -1,4 +1,4 @@
-#include <stdlib.h>
+/*#include <stdlib.h>
 int	*ft_rrange(int start, int end)
 {
 	int i = 0;
@@ -40,7 +40,22 @@ int	*ft_rrange(int start, int end)
 	}
 	return (str_of_ints);
 
+}*/
+#include <stdlib.h>
+
+int		*ft_rrange(int min, int max)
+{
+    int		*s;
+	int		len = (max >= min) ? max - min : min - max;
+    if (!(s = (int*)malloc(sizeof(int) * len)))
+        return (NULL);
+    while (max != min)
+        *s++ = (max >= min) ? min++ : min--;
+    *s = min;
+    return (s - len);
 }
+
+#include<stdio.h>
 int main() {
     // Test cases
     int start, end;
@@ -80,7 +95,7 @@ int main() {
     free(result);
 
     // Test case 4
-    start = 0;
+    start = -7;
     end = -3;
     result = ft_rrange(start, end);
     printf("Result for (%d, %d):\n", start, end);
