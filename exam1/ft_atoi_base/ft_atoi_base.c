@@ -46,8 +46,8 @@ int	ft_atoi_base(const char *str, int str_base )
 #include<stdio.h>
 int main(void)
 {
-    char *num = "  \n \t          ++++-1234a34     10010101000110100a1;;20";
-    int base = 2;
+    char *num = "  \n \t          -1234a34     10010101000110100a1;;20";
+    int base = 10;
     int res = ft_atoi_base(num , base);
     printf("%d \n", res);
 }
